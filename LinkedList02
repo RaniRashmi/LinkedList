@@ -1,0 +1,225 @@
+Program 2:Implement an algorithm to find the kth to last element of single LinkList.
+
+
+
+    Method 1:Recursive solution 
+    Method 2:Iterative Solution
+
+
+
+Method 1: Basically we have reach at kth postion from the last so that we will able to print kth element.
+
+
+    we already know the kth element which will pass through main.
+    we call the recursive funtion to find end of the list.
+    as we get the end of the list we will return counter to that fuction 0
+    now we will add 1 in each parent call
+    when counter is equal to k .we get the kth postion.
+    Now we are able to print element on kth position from last postion
+
+Method 2:
+
+    Take two pointer p1 , p2,Intially p1 and p2 both are first.
+    we place p1 at begging(first) and move p2 till the k nodes.
+    now p1 and p2 are k nodes apart from each other
+    now move p1 and p2 with same space till p2 reach end.
+    now p1 with be at the k node from the end.
+        this algo take 
+            time=O(n)
+            space=O(1)
+
+
+Source Code:
+
+
+class Node{
+
+ public int data;
+
+ public Node next;
+
+ public Node(int value)
+
+ {
+
+  data=value;
+
+ }
+
+ public void Display()
+
+ {
+
+  System.out.println(data+" ");
+
+ }
+
+}
+
+class LinkedList{
+
+ private Node first;
+
+ public LinkedList()
+
+ {
+
+  first=null;
+
+ }
+
+ public boolean isEmpty()
+
+ {
+
+  return(first==null);
+
+ }
+
+ public void insert(int value)
+
+ {
+
+  Node newNode=new Node(value);
+
+  newNode.next=first;
+
+  first=newNode;
+
+ }
+
+ public Node getFirst()
+
+ {
+
+  return first;
+
+ }
+
+ public void Display()
+
+ {
+
+  Node current=first;
+
+  while(current!=null)
+
+  {
+
+   current.Display();
+
+   current=current.next;
+
+   
+
+  }
+
+ }
+
+ //recursive solution(space=O(n),time=O(n)
+
+  public int Findkth(Node first,int k)
+
+  {
+
+  if(first==null)
+
+   return 0;
+
+  else
+
+  {
+
+   int i;
+
+     i=Findkth(first.next,k)+1;
+
+     if(i==k)
+
+   System.out.println("\n The kth="+k+"from the last is"+first.data);
+
+     return i;
+
+   
+
+  }
+
+  }
+
+  //iterative solution
+
+ public void FindkthIterative(int k)
+
+ {
+
+  Node p1=first,p2=first;
+
+  int i;
+
+  //after this p2 is will be on kth position
+
+  for(i=0;i<k&&p2!=null;i++)
+
+   p2=p2.next;
+
+  //check for the if p2 is null
+
+  while(p2!=null)
+
+  {
+
+   p2=p2.next;
+
+   p1=p1.next;
+
+  }
+
+  System.out.println("\n The kth="+k+"element from the last is"+p1.data); 
+
+  }
+
+ }
+
+ 
+
+public class Program2 {
+
+
+ public static void main(String[] args) {
+
+  
+
+  LinkedList input=new LinkedList();
+
+  input.insert(10);
+
+  input.insert(10);
+
+  input.insert(30);
+
+  input.insert(40);
+
+  input.insert(50);
+
+  input.insert(60);
+
+  
+
+  input.Display();
+
+  
+
+  Node first;
+
+  first=input.getFirst();
+
+  input.Findkth(first,4);
+
+  input.FindkthIterative(4);
+
+  
+
+ }
+
+
+}
