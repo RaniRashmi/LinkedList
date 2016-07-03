@@ -1,0 +1,290 @@
+Program 7-
+
+
+Example-
+
+
+    Input: 60 50 40 30 20 10 
+        loop list  60 50 40 30 20 10 50
+    Output 
+          starting point of the loop =50
+
+
+Idea-
+
+
+    Make a circular method  to connect the last value with loop beginning
+    Make a method to detect a loop
+    Make a search method 
+    Make a function to check start of the loop
+
+
+
+class Node
+
+{
+
+    int data;
+
+ Node next;
+
+ 
+
+ public Node(int value)
+
+ {
+
+  data=value;
+
+ }
+
+ public void Display()
+
+ {
+
+  System.out.print(data+" ");
+
+ }
+
+}
+
+class LinkedList
+
+{
+
+ private Node first;
+
+ 
+
+ public LinkedList()
+
+ {
+
+  first=null;
+
+ }
+
+ public boolean IsEmpty()
+
+ {
+
+  return(first==null);
+
+ }
+
+ public void MakeCircular(Node a, Node b)
+
+ {
+
+  if(a.next==null)
+
+  a.next=b;
+
+ }
+
+ public boolean DetectLoop()
+
+ {
+
+  Node slow=first,fast=first;
+
+  do
+
+  {
+
+   if(slow==null||fast==null)
+
+   return false;
+
+   slow=slow.next;
+
+   fast=fast.next.next; 
+
+  }
+
+  while(slow!=fast);
+
+  return true;
+
+ }
+
+ public Node FindBeginning()
+
+ {
+
+  Node slow=first,fast=first;
+
+  do{
+
+   slow=slow.next;
+
+   fast=fast.next.next;
+
+   //System.out.println("slow="+slow.data+"fast="+fast.data);
+
+    }
+
+  while(slow!=fast);
+
+  slow=first;
+
+  
+
+  while(slow!=fast)
+
+  {
+
+  slow=slow.next;
+
+  fast=fast.next;
+
+  }
+
+  return slow;  
+
+ }
+
+ public Node search(int value)
+
+ {
+
+  Node current=first;
+
+  while(current!=null)
+
+  {
+
+   if(current.data==value)
+
+    return current;
+
+   current=current.next;
+
+  }
+
+  return null;
+
+ }
+
+ public void insert(int value)
+
+ {
+
+  Node newNode=new Node(value);
+
+  newNode.next=first;
+
+  first=newNode;
+
+  
+
+ }
+
+ public void Display()
+
+ {
+
+  Node current=first;
+
+  while(current!=null)
+
+  {
+
+   current.Display();
+
+   current=current.next;
+
+  }
+
+ }
+
+ public void DisplayTill(int value)
+
+ {
+
+  Node temp=first;
+
+  int counter=0;
+
+  while(true)
+
+  {
+
+   temp.Display();
+
+   if(counter==1&&temp.data==value)
+
+   break;
+
+   if(temp.data==value)
+
+    counter=1;
+
+   temp=temp.next;
+
+  }
+
+ }
+
+ 
+
+}
+
+public class Program6 {
+
+
+ public static void main(String[] args) {
+
+  
+
+  LinkedList input=new LinkedList();
+
+  input.insert(10);
+
+  input.insert(20);
+
+  input.insert(30);
+
+  input.insert(40);
+
+  input.insert(50);
+
+  input.insert(60);
+
+  input.Display();
+
+  System.out.println();
+
+  
+
+ Node temp= input.search(50);
+
+        Node temp2= input.search(10);
+
+        input.MakeCircular(temp2, temp);
+
+        input.DisplayTill(50);
+
+        System.out.println();
+
+        
+
+        
+
+        boolean flag= input.DetectLoop();
+
+        if(flag)
+
+        {
+
+            temp = input.FindBeginning();
+
+            System.out.println("The starting point of the loop is at " +temp.data);
+
+        }
+
+ }
+
+}
+
+
