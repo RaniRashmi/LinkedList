@@ -1,0 +1,198 @@
+Program 3:Implement an algorithm to delete a node in the middle of single linked list, given only access to that node.Head (first) node is not given.
+
+
+let assume
+
+
+    Input 50->40>30->20->10
+
+
+             if k=30
+
+
+     Output 50->40->30->20
+
+
+Algo-
+
+
+    we take two pointer currentNode and p2
+    currentNode poining to the element which we want to delete and p2 will be next element of currentNode.
+    check which node we want to delete or which next of node are not empty
+        if condition is false that means we can not delete
+        otherwise copy the element of p2 into currentNode and now currentNode next pointing to the  next of p2.
+    finally get the new Linked List.
+
+
+
+Source code:
+
+
+class Node
+
+{
+
+ public int data;
+
+ public Node next;
+
+ 
+
+ public Node(int value)
+
+ {
+
+  data=value;
+
+ }
+
+ public void Display()
+
+ {
+
+  System.out.println(data+"");
+
+ }
+
+}
+
+class LinkedList
+
+{
+
+ private Node first;
+
+ public  LinkedList()
+
+ {
+
+  first=null;
+
+ }
+
+ public boolean isEmpty()
+
+ {
+
+  return(first==null);
+
+ }
+
+ public void insert(int value)
+
+ {
+
+ Node newNode=new Node(value);
+
+ newNode.next=first;
+
+ first=newNode;
+
+ }
+
+ public void Display()
+
+ {
+
+  Node current =first;
+
+  while(current!=null)
+
+  {
+
+   current.Display();
+
+   current=current.next;
+
+  }
+
+ }
+
+ public Node search(int value)
+
+ {
+
+  Node current =first;
+
+  while(current.data!=value) 
+
+  {
+
+    if(current.next==null)
+
+    return null;
+
+    else
+
+    current= current.next;
+
+  }
+
+  return current; 
+
+  
+
+ }
+
+    //head is unknown but we know the element which we are interested to delete
+
+     public boolean deleteNode(Node currentNode)
+
+     {
+
+     if(currentNode==null||currentNode.next==null)
+
+      return false;
+
+     
+
+      Node p2=currentNode.next;
+
+        currentNode.data=p2.data;  //coping the data of p2 into currentNode
+
+        currentNode.next=p2.next;
+
+        return true;
+
+     }
+
+}
+
+public class Program3 {
+
+ public static void main(String[] args) {
+
+  LinkedList input=new LinkedList();
+
+  input.insert(10);
+
+  input.insert(20);
+
+  input.insert(30);
+
+  input.insert(40);
+
+  input.insert(50);
+
+  
+
+  input.Display();
+
+  System.out.println( );
+
+  Node currentNode=input.search(30);
+
+  input.deleteNode(currentNode);
+
+  
+
+  input.Display();
+
+  
+
+ }
+
+
+}
+
+
