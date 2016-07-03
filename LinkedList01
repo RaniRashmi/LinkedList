@@ -1,0 +1,272 @@
+Today we will do Linked List programming. Linked List is a linear data structure.It is used for data storing.
+
+
+//Program-Single Linked List program which for insertion and deletion from front and search and delete at any position.
+
+
+Single Linked List programming required-
+
+
+    three class
+        first class Node where will define variable and Node(value copy in data variable) and display function defined.
+        second class is Linked List where all function like insertion, deletion , search and display are made
+        third will be main function.
+
+
+Source code-
+
+
+class Node{
+
+   public int data;
+
+   public Node next;
+
+   public Node(int value)
+
+   {
+
+   data=value;
+
+   }
+
+   public void display()
+
+   {
+
+   System.out.println("["+data+"]");
+
+   } 
+
+}
+
+class SingleList
+
+{
+
+ private Node first;
+
+ public SingleList()
+
+ {
+
+  first=null;
+
+ }
+
+ //insert from begging
+
+ public void insert(int value)
+
+ {
+
+ Node newNode= new Node(value);
+
+ newNode.next= first;
+
+ first=newNode;
+
+ }
+
+ public boolean isEmpty()
+
+ {
+
+  return(first== null);
+
+ }
+
+ public Node delete()
+
+ {
+
+  Node temp=first;
+
+  first=first.next;
+
+  return temp;
+
+ }
+
+ public void display()
+
+ {
+
+ System.out.println("list item");
+
+ Node current=first;
+
+ while(current!=null)
+
+ {
+
+  current.display();
+
+  current=current.next;
+
+ }
+
+ }
+
+ 
+
+ public Node search(int value)
+
+ {
+
+  Node current=first;
+
+  while(current.data!=value)
+
+  {
+
+   if(current.next==null)
+
+   return null;
+
+   else
+
+    current=current.next;
+
+  }
+
+  return current;
+
+ }
+
+ public Node delete(int value)
+
+ {
+
+  Node current=first;
+
+  Node prev=first;
+
+  while(current.data!=value)
+
+  {
+
+   if(current.next==null)
+
+   return null;
+
+   else
+
+   {
+
+    prev=current;
+
+    current=current.next;
+
+   }
+
+  }
+
+  if( current==first)
+
+  {
+
+   first=first.next;
+
+  }
+
+  else
+
+   prev.next=current.next;
+
+  return current;
+
+   
+
+ }
+
+}
+
+
+public class ListProgram {
+
+
+ public static void main(String[] args) {
+
+ 
+
+  SingleList input=new SingleList();
+
+  input.insert(10);
+
+  input.insert(20);
+
+  input.insert(30);
+
+  input.insert(40);
+
+  input.insert(50);
+
+  
+
+  input.display();
+
+  while(!input.isEmpty())
+
+  {
+
+   Node member=input.delete();
+
+   System.out.println("node deleted");
+
+   member.display();
+
+   System.out.println("");
+
+    
+
+  }
+
+   
+
+          input.insert(10);
+
+   input.insert(20);
+
+   input.insert(70);
+
+   input.insert(80);
+
+   input.insert(90);
+
+   
+
+   input.display();
+
+   
+
+   Node inputSearch=input.search(70);
+
+   if(inputSearch!=null)
+
+   System.out.println("node is found:"+inputSearch.data);
+
+   else
+
+     System.out.println("node is not found");
+
+   
+
+   Node inputdelete=input.delete(70);
+
+   if(inputdelete!=null)
+
+   System.out.println("node deleted:"+inputdelete.data);
+
+   else
+
+     System.out.println("can not delete node ");
+
+   
+
+   input.display();
+
+ }
+
+
+}
