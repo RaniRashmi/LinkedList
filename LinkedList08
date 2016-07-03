@@ -1,0 +1,192 @@
+Program 8- Implement a linked list to check if a linked list is a palindrome.
+
+
+Example:
+
+
+    Input: 10->20->30->20->10
+    Linked List is a palindrome.
+
+
+
+import java.util.Stack;
+
+class Node
+
+{
+
+ int data;
+
+ Node next;
+
+ 
+
+ public Node(int value)
+
+ {
+
+  data=value;
+
+ }
+
+ public void Display()
+
+ {
+
+  System.out.println(data+"");
+
+ }
+
+}
+
+class LinkedList
+
+{
+
+ private Node first;
+
+ 
+
+ public LinkedList()
+
+ {
+
+  first=null;
+
+ }
+
+ public boolean IsEmplty()
+
+ {
+
+  return(first==null);
+
+ }
+
+ public Node getHead()
+
+ {
+
+  return first;
+
+ }
+
+ public void insert(int value)
+
+ {
+
+  Node newNode=new Node(value);
+
+  newNode.next=first;
+
+  newNode=first;
+
+ }
+
+ public Node Display()
+
+ {
+
+  Node current=first;
+
+  while(current!=null)
+
+  {
+
+   current.Display();
+
+   current=current.next;
+
+  }
+
+  return null;
+
+ }
+
+ public boolean IsPalindrome()
+
+ {
+
+  Node fast=first,slow=first;
+
+  Stack xyz=new Stack();
+
+  while(fast!=null&&fast.next!=null)
+
+  {
+
+   xyz.push(Integer.valueOf(slow.data));
+
+   slow=slow.next;
+
+   fast=fast.next.next;
+
+  }
+
+  if(fast!=null)
+
+  {
+
+   slow=slow.next;
+
+  }
+
+  while(slow!=null&&!xyz.isEmpty())
+
+  {
+
+   if(!xyz.pop().equals(Integer.valueOf(slow.data)))
+
+    return false;
+
+   slow=slow.next;
+
+  }
+
+  return true;
+
+  
+
+ }
+
+}
+
+public class Program7 {
+
+
+ public static void main(String[] args) {
+
+
+      LinkedList input=new LinkedList();
+
+      input.insert(10);
+
+      input.insert(20);
+
+      input.insert(30);
+
+      input.insert(20);
+
+      input.insert(10);
+
+      input.Display();
+
+      
+
+      boolean flag=input.IsPalindrome();
+
+      if(flag)
+
+      System.out.println("LinkedList is Palindrome");
+
+       else
+
+      System.out.println("LinkedList is not Palindrome");
+
+
+ }
+
+
+}
+
+
