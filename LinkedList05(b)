@@ -1,0 +1,287 @@
+Program 5(b) Suppose digits are stored in forward order.Repeat the above problem.
+
+Example:
+
+
+
+    Input:(6-> 2 ->5)+(3->8->1)
+    Output: 10->0->6
+
+
+Idea:
+
+
+    As the problem say that now the digits are stored in forward order we have to check for if two numbers are same.
+        If they are not same we have padding 0 in shorter length number so that both will be equal length.
+        to add these number we have to scan both the list till the end because we require end elements carry and node for  one before element of end  and so on.
+    To store carry and newNode we have made new  class Partialsum
+    we have created Partialsum type add function to call paddList  function and Partialsum type AddRecursive function to add element and carry.
+
+Note Partiialsum is class which contains node and carry.
+
+
+
+Source code
+
+
+class Node
+
+{
+
+ public int data;
+
+ public Node next;
+
+ public Node(int value)
+
+ {
+
+ data=value;
+
+ }
+
+ public void Display()
+
+ {
+
+  System.out.print(data+"");
+
+ }
+
+}
+
+//this class have carry and node
+
+class Partialsum
+
+{
+
+ public int carry=0;
+
+ public Node newNode=null;
+
+}
+
+class LinkedList
+
+{
+
+ private Node first;
+
+ public LinkedList()
+
+ {
+
+  first=null;
+
+ }
+
+ public Node getHead()
+
+ {
+
+  return first;
+
+ }
+
+ public int length(Node n)
+
+ {
+
+  Node current=n;
+
+  int i=0;
+
+  while(current!=null)
+
+  {
+
+   current=current.next;
+
+   i++;
+
+  }
+
+  return i;
+
+ }
+
+ public Node padList(int k, Node n)
+
+ {
+
+  int i;
+
+  for(i=0;i<k;i++)
+
+  {
+
+   Node newNode=new Node(0);
+
+   newNode.next=n;
+
+   n=newNode;
+
+  }
+
+  return n;
+
+ }
+
+ public void setHead(Node first1)
+
+ {
+
+  first=first1;
+
+ }
+
+ public void insert(int value)
+
+ {
+
+  Node newNode=new Node(value);
+
+  newNode.next=first;
+
+  first=newNode;
+
+ }
+
+ public void Display()
+
+ {
+
+  Node current=first;
+
+  while(current!=null)
+
+  {
+
+   current.Display();
+
+   current=current.next;
+
+  }
+
+ }
+
+ public Partialsum add(Node L1,Node L2)
+
+ {
+
+  int length1=length(L1);
+
+  int length2=length(L2);
+
+  if(length1>length2)
+
+  L2=padList(length1-length2,L2);
+
+  else
+
+  L1=padList(length2-length1,L1);
+
+  
+
+  Partialsum xyz=AddRecursive(L1,L2);
+
+  return xyz;
+
+ }
+
+
+
+ private Partialsum AddRecursive(Node L1, Node L2) {
+
+  if(L1==null&&L2==null)
+
+  {
+
+   Partialsum var=new Partialsum();
+
+   var.carry=0;
+
+   var.newNode=null;
+
+   return var;
+
+  }
+
+  Partialsum var1=AddRecursive(L1.next,L2.next);
+
+  int value=L1.data+L2.data+var1.carry;
+
+  Node newNode=new Node(value%10);
+
+  newNode.next=var1.newNode;
+
+  
+
+  Partialsum result=new Partialsum();
+
+  result.carry=value>=10?1:0;
+
+  result.newNode=newNode;
+
+  return result;
+
+ }
+
+ 
+
+ 
+
+}
+
+public class Program5 {
+
+ public static void main(String[] args) {
+
+   LinkedList input1=new LinkedList();
+
+   input1.insert(7);
+
+   input1.insert(1);
+
+   input1.insert(6);
+
+   Node first1=input1.getHead();
+
+   input1.Display();
+
+   System.out.println();
+
+
+   
+
+   LinkedList input2=new LinkedList();
+
+   input2.insert(5);
+
+   input2.insert(9);
+
+   input2.insert(2);
+
+   Node first2=input2.getHead();
+
+   input2.Display();
+
+   System.out.println();
+
+   
+
+   
+
+   LinkedList input3=new LinkedList();
+
+        Partialsum xyz= input3.add(first1, first2);
+
+        input3.setHead(xyz.newNode);
+
+        input3.Display();
+
+ }
+
+
+}
