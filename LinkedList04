@@ -1,0 +1,237 @@
+Program 4:Write a code to partition a linked list around a value x, such that all nodes less than x come before and all nodes greater than or equal to x.
+
+
+Example- assume x=50
+
+
+    Input-     50 100 40 90 20 50  
+    Output-  20 40 50 90 100 50
+
+
+
+Idea-
+
+
+    we have create two linked list.
+    elements which are less than keep in first list and element greater than keep in second list
+    now merge the first and second list in order to get output 
+
+
+Source code-
+
+
+class Node
+
+{
+
+ public int data;
+
+ public Node next;
+
+ public Node(int value)
+
+ {
+
+  data=value;
+
+ }
+
+ public void Display()
+
+ {
+
+  System.out.print(data+" ");
+
+ }
+
+}
+
+class LinkedList
+
+{
+
+ private Node first;
+
+ public LinkedList()
+
+ {
+
+  first=null;
+
+ }
+
+ public boolean isEmpty()
+
+ {
+
+  return(first==null);
+
+ }
+
+ public void insert(int value)
+
+ {
+
+  Node newNode=new Node(value);
+
+  newNode.next=first;
+
+  first=newNode;
+
+ }
+
+ public void Display()
+
+ {
+
+  Node current =first;
+
+  while(current!=null)
+
+  {
+
+   current.Display();
+
+   current=current.next;
+
+  }
+
+ }
+
+ public Node search(int value)
+
+ {
+
+  Node current =first;
+
+  while(current.data!=value) 
+
+  {
+
+    if(current.next==null)
+
+    return null;
+
+    else
+
+    current= current.next;
+
+  }
+
+  return current;   
+
+  
+
+ }
+
+ public void partion(int x)
+
+ { 
+
+  Node first1=null,first2=null,temp=first,tempNext=null;
+
+  
+
+  while(temp!=null)
+
+  {
+
+   tempNext=temp.next;
+
+   if(temp.data<x)
+
+   {
+
+    //list 1
+
+    temp.next=first1;
+
+    first1=temp;
+
+   }
+
+   else
+
+   {
+
+    //list 2
+
+    temp.next=first2;
+
+    first2=temp;
+
+   }
+
+   temp=tempNext;
+
+   
+
+  }
+
+  //now merging of list 1 and list 2
+
+  if(first1==null)
+
+  first=first1;
+
+  else
+
+  {
+
+   //merge
+
+  temp=first1;
+
+  while(temp.next!=null)
+
+    temp=temp.next;
+
+    temp.next=first2;
+
+  first=first1;
+
+  }
+
+  
+
+ }
+
+}
+
+public class Program4 {
+
+
+ public static void main(String[] args) {
+
+  LinkedList input=new LinkedList();
+
+  input.insert(50);
+
+  input.insert(20);
+
+  input.insert(90);
+
+  input.insert(40);
+
+  input.insert(100);
+
+  input.insert(50);
+
+  
+
+  input.Display();
+
+  System.out.println();
+
+  
+
+  input.partion(50);
+
+  input.Display();
+
+  
+
+ }
+
+
+}
