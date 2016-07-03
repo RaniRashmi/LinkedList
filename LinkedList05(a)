@@ -1,0 +1,203 @@
+Program 5(a)-We have two numbers represented by a linked list,where each node contains a single linked digit.the digits are stored in reverse order,such that the 1's digit at the head of the list.write a function that adds two numbers and return the sum as a Linked List.
+
+Example-
+
+
+    Input:(6->2->5)+(3->8->1). that is 526+183.
+    Output:9->0->7 that  is 709
+
+
+
+class Node
+
+{
+
+ public int data;
+
+ public Node next;
+
+ 
+
+ public Node(int value)
+
+ {
+
+  data=value;
+
+ }
+
+ public void Display()
+
+ {
+
+  System.out.print(data+"");
+
+ }
+
+}
+
+class LinkedList
+
+{
+
+ private Node first;
+
+ 
+
+ public LinkedList()
+
+ {
+
+  first=null;
+
+ }
+
+ 
+
+ public Node getHead()
+
+ {
+
+  return first; 
+
+ }
+
+ 
+
+ public void insert(int value)
+
+ {
+
+  Node newNode =new Node(value);
+
+  newNode.next=first;
+
+  first=newNode;
+
+  
+
+ }
+
+ public void Display()
+
+ {
+
+  Node current=first;
+
+  while(current!=null)
+
+  {
+
+   current.Display();
+
+   current=current.next;
+
+  }
+
+  
+
+ }
+
+ public void setHead(Node first1)
+
+    {
+
+        first=first1;
+
+    }
+
+ public Node addList(Node L1,Node L2,int carry)
+
+ {
+
+  if(L1==null&& L2==null&&carry==0)
+
+   return null;
+
+  int value=0;
+
+  
+
+  value=value+carry;
+
+  if(L1!=null)
+
+   value+=L1.data;
+
+  if(L2!=null)
+
+   value+=L2.data;
+
+  Node result=new Node(value%10);
+
+  
+
+   Node more=addList(L1==null?null:L1.next, L2==null?null:L2.next,value>=10?1:0);
+
+     result.next=more;
+
+     return result;
+
+ }
+
+ 
+
+}
+
+public class Program5 {
+
+
+ public static void main(String[] args) {
+
+  
+
+    LinkedList input1=new LinkedList();
+
+    input1.insert(6);
+
+    input1.insert(1);
+
+    input1.insert(7);
+
+    input1.Display();
+
+    System.out.println();
+
+    Node first1=input1.getHead();
+
+    
+
+    
+
+    LinkedList input2=new LinkedList();
+
+    input2.insert(2);
+
+    input2.insert(9);
+
+    input2.insert(5);
+
+    input2.Display();
+
+    System.out.println();
+
+    Node first2=input2.getHead();
+
+    
+
+    LinkedList input3=new LinkedList();
+
+    Node first3;
+
+         first3= input3.addList(first1, first2, 0);
+
+         input3.setHead(first3);
+
+         input3.Display();
+
+        
+
+ }
+
+
+}
